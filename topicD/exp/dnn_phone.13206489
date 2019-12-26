@@ -1,0 +1,108 @@
+[ INFO : 2019-12-23 16:36:33,311 ] - Storing data at: exp/dnn_random_212_fbank
+[ INFO : 2019-12-23 16:36:33,312 ] - <== Passed Arguments ==>
+[ INFO : 2019-12-23 16:36:33,313 ] - {'classifier': 'dnn_classifier',
+[ INFO : 2019-12-23 16:36:33,313 ] -  'classifier_args': {'hid_dims': [128, 256, 512, 256, 128, 64], 'num_cls': 51},
+[ INFO : 2019-12-23 16:36:33,313 ] -  'context': 2,
+[ INFO : 2019-12-23 16:36:33,313 ] -  'dataloader_args': {'batch_size': 2048, 'num_workers': 8},
+[ INFO : 2019-12-23 16:36:33,313 ] -  'dev_feat_stream': 'apply-cmvn '
+[ INFO : 2019-12-23 16:36:33,313 ] -                     '--utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/dev/utt2spk '
+[ INFO : 2019-12-23 16:36:33,313 ] -                     'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/dev/cmvn.scp '
+[ INFO : 2019-12-23 16:36:33,313 ] -                     'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/dev/feats.scp '
+[ INFO : 2019-12-23 16:36:33,313 ] -                     'ark:- |apply-cmvn-sliding --min-cmn-window=15 '
+[ INFO : 2019-12-23 16:36:33,313 ] -                     '--cmn-window=1000 ark:- ark:- | splice-feats '
+[ INFO : 2019-12-23 16:36:33,314 ] -                     '--left-context={} --right-context={} ark:- ark:-|',
+[ INFO : 2019-12-23 16:36:33,314 ] -  'dev_label_stream': 'copy-int-vector '
+[ INFO : 2019-12-23 16:36:33,314 ] -                      'ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_dev.txt '
+[ INFO : 2019-12-23 16:36:33,314 ] -                      'ark:- |',
+[ INFO : 2019-12-23 16:36:33,314 ] -  'early_stop': 10,
+[ INFO : 2019-12-23 16:36:33,314 ] -  'encoder': 'FcEncoder',
+[ INFO : 2019-12-23 16:36:33,314 ] -  'encoder_args': {'hid_dims': [256, 128], 'latent_dim': 64},
+[ INFO : 2019-12-23 16:36:33,314 ] -  'encoder_path': None,
+[ INFO : 2019-12-23 16:36:33,314 ] -  'epochs': 200,
+[ INFO : 2019-12-23 16:36:33,314 ] -  'fix_encoder': None,
+[ INFO : 2019-12-23 16:36:33,314 ] -  'improvecriterion': 'loss',
+[ INFO : 2019-12-23 16:36:33,314 ] -  'num_freq': 80,
+[ INFO : 2019-12-23 16:36:33,314 ] -  'optimizer': 'Adam',
+[ INFO : 2019-12-23 16:36:33,315 ] -  'optimizer_args': {'lr': 0.001},
+[ INFO : 2019-12-23 16:36:33,315 ] -  'scaler_path': 'exp/scaler_fbank.pth',
+[ INFO : 2019-12-23 16:36:33,315 ] -  'scheduler': 'ReduceLROnPlateau',
+[ INFO : 2019-12-23 16:36:33,315 ] -  'scheduler_args': {'cooldown': 1,
+[ INFO : 2019-12-23 16:36:33,315 ] -                     'factor': 0.1,
+[ INFO : 2019-12-23 16:36:33,315 ] -                     'mode': 'min',
+[ INFO : 2019-12-23 16:36:33,315 ] -                     'patience': 10,
+[ INFO : 2019-12-23 16:36:33,315 ] -                     'threshold': 0.001,
+[ INFO : 2019-12-23 16:36:33,315 ] -                     'verbose': False},
+[ INFO : 2019-12-23 16:36:33,315 ] -  'test_feat_stream': 'apply-cmvn '
+[ INFO : 2019-12-23 16:36:33,315 ] -                      '--utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/test/utt2spk '
+[ INFO : 2019-12-23 16:36:33,315 ] -                      'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/test/cmvn.scp '
+[ INFO : 2019-12-23 16:36:33,315 ] -                      'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/test/feats.scp '
+[ INFO : 2019-12-23 16:36:33,315 ] -                      'ark:- |apply-cmvn-sliding --min-cmn-window=15 '
+[ INFO : 2019-12-23 16:36:33,315 ] -                      '--cmn-window=1000 ark:- ark:- | splice-feats '
+[ INFO : 2019-12-23 16:36:33,316 ] -                      '--left-context={} --right-context={} ark:- ark:-|',
+[ INFO : 2019-12-23 16:36:33,316 ] -  'test_label_stream': 'copy-int-vector '
+[ INFO : 2019-12-23 16:36:33,316 ] -                       'ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_test.txt '
+[ INFO : 2019-12-23 16:36:33,316 ] -                       'ark:- |',
+[ INFO : 2019-12-23 16:36:33,316 ] -  'train_feat_stream': 'apply-cmvn '
+[ INFO : 2019-12-23 16:36:33,316 ] -                       '--utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/utt2spk '
+[ INFO : 2019-12-23 16:36:33,316 ] -                       'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/cmvn.scp '
+[ INFO : 2019-12-23 16:36:33,316 ] -                       'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/feats.scp '
+[ INFO : 2019-12-23 16:36:33,316 ] -                       'ark:- |apply-cmvn-sliding --min-cmn-window=15 '
+[ INFO : 2019-12-23 16:36:33,316 ] -                       '--cmn-window=1000 ark:- ark:- | splice-feats '
+[ INFO : 2019-12-23 16:36:33,316 ] -                       '--left-context={} --right-context={} ark:- ark:-|',
+[ INFO : 2019-12-23 16:36:33,316 ] -  'train_label_stream': 'copy-int-vector '
+[ INFO : 2019-12-23 16:36:33,316 ] -                        'ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_train.txt '
+[ INFO : 2019-12-23 16:36:33,316 ] -                        'ark:- |'}
+apply-cmvn-sliding --min-cmn-window=15 --cmn-window=1000 ark:- ark:- 
+apply-cmvn --utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/utt2spk scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/cmvn.scp scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/feats.scp ark:- 
+splice-feats --left-context=2 --right-context=2 ark:- ark:- 
+WARNING (apply-cmvn[5.5.537-e2c0]:ReadScriptFile():kaldi-table.cc:63) Empty 463'th line in script file
+WARNING (apply-cmvn[5.5.537-e2c0]:ReadScriptFile():kaldi-table.cc:46) [script file was: /mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/cmvn.scp]
+ERROR (apply-cmvn[5.5.537-e2c0]:RandomAccessTableReader():util/kaldi-table-inl.h:2512) Error opening RandomAccessTableReader object  (rspecifier is: scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/cmvn.scp)
+
+[ Stack-Trace: ]
+/mnt/lustre/sjtu/users/hl761/tools/KALDI/kaldi-dev/src/lib/libkaldi-base.so(kaldi::MessageLogger::LogMessage() const+0x8b7) [0x7f26d820bd9d]
+apply-cmvn(kaldi::MessageLogger::LogAndThrow::operator=(kaldi::MessageLogger const&)+0x11) [0x417a3d]
+apply-cmvn(kaldi::RandomAccessTableReader<kaldi::KaldiObjectHolder<kaldi::Matrix<double> > >::RandomAccessTableReader(std::string const&)+0xa0) [0x4217d6]
+apply-cmvn(kaldi::RandomAccessTableReaderMapped<kaldi::KaldiObjectHolder<kaldi::Matrix<double> > >::RandomAccessTableReaderMapped(std::string const&, std::string const&)+0x16) [0x421ffc]
+apply-cmvn(main+0x6f6) [0x414db3]
+/lib64/libc.so.6(__libc_start_main+0xf5) [0x7f26d36b33d5]
+apply-cmvn() [0x4145f9]
+
+kaldi::KaldiFatalErrorLOG (apply-cmvn-sliding[5.5.537-e2c0]:main():apply-cmvn-sliding.cc:75) Applied sliding-window cepstral mean normalization to 0 utterances, 0 had errors.
+copy-int-vector ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_train.txt ark:- 
+LOG (copy-int-vector[5.5.537-e2c0]:main():copy-int-vector.cc:83) Copied 3696 vectors of int32.
+copy-int-vector ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_train.txt ark:- 
+LOG (copy-int-vector[5.5.537-e2c0]:main():copy-int-vector.cc:83) Copied 3696 vectors of int32.
+copy-int-vector ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_train.txt ark:- 
+LOG (copy-int-vector[5.5.537-e2c0]:main():copy-int-vector.cc:83) Copied 3696 vectors of int32.
+Traceback (most recent call last):
+  File "runners/train_dnn.py", line 253, in <module>
+    fire.Fire(main)
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/fire/core.py", line 138, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/fire/core.py", line 471, in _Fire
+    target=component.__name__)
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/fire/core.py", line 675, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File "runners/train_dnn.py", line 169, in main
+    train_dataloader, cv_dataloader, eval_dataloader = getdataloaders(config_parameters)
+  File "runners/train_dnn.py", line 30, in getdataloaders
+    config_parameters["train_label_stream"]):
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 819, in __next__
+    return self._process_data(data)
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 846, in _process_data
+    data.reraise()
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/_utils.py", line 385, in reraise
+    raise self.exc_type(msg)
+KeyError: Caught KeyError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/_utils/worker.py", line 178, in _worker_loop
+    data = fetcher.fetch(index)
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/mnt/lustre/sjtu/home/zkz01/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/mnt/lustre/sjtu/home/zkz01/leinao/datasets/dataset.py", line 23, in __getitem__
+    feat = self._features[kaldi_key][index]
+KeyError: 'mgsh0_si1176'
+
