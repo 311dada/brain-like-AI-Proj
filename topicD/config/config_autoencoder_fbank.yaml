@@ -1,0 +1,57 @@
+dataloader_args:
+    batch_size: 2048
+    num_workers: 8
+
+optimizer: Adam
+optimizer_args:
+    lr: 0.001
+    weight_decay: 0.000001
+
+scheduler: ReduceLROnPlateau
+scheduler_args:
+    mode: min
+    factor: 0.1
+    patience: 10
+    cooldown: 1
+    verbose: False
+    threshold: 0.001
+
+context: 2
+#train_feat_stream: copy-feats scp:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_fbank/train/feats.scp ark:- | splice-feats --left-context={} --right-context={} ark:- ark,t:- |
+#train_feat_stream: copy-feats scp:toy_data_fbank/train.scp ark:- | splice-feats --left-context={} --right-context={} ark:- ark,t:- | 
+train_feat_stream: apply-cmvn --utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/utt2spk scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/cmvn.scp scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/train/feats.scp ark:- |apply-cmvn-sliding --min-cmn-window=15 --cmn-window=1000 ark:- ark:- | splice-feats --left-context={} --right-context={} ark:- ark:-|
+
+train_label_stream: copy-int-vector ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_train.txt ark:- |
+#train_label_stream: copy-int-vector ark:toy_data_fbank/ali_train.txt ark:- |
+
+#dev_feat_stream: copy-feats scp:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_fbank/dev/feats.scp ark:- | splice-feats --left-context={} --right-context={} ark:- ark,t:- |
+#dev_feat_stream: copy-feats scp:toy_data_fbank/dev.scp ark:- | splice-feats --left-context={} --right-context={} ark:- ark,t:- | 
+dev_feat_stream: apply-cmvn --utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/dev/utt2spk scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/dev/cmvn.scp scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/dev/feats.scp ark:- |apply-cmvn-sliding --min-cmn-window=15 --cmn-window=1000 ark:- ark:- | splice-feats --left-context={} --right-context={} ark:- ark:-|
+dev_label_stream: copy-int-vector ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_dev.txt ark:- |
+#dev_label_stream: copy-int-vector ark:toy_data_fbank/ali_dev.txt ark:- |
+
+#test_feat_stream: copy-feats scp:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_fbank/test/feats.scp ark:- | splice-feats --left-context={} --right-context={} ark:- ark,t:- |
+#test_feat_stream: copy-feats scp:toy_data_fbank/test.scp ark:- | splice-feats --left-context={} --right-context={} ark:- ark,t:- | 
+test_feat_stream: apply-cmvn --utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/test/utt2spk scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/test/cmvn.scp scp:/mnt/lustre/sjtu/home/zkz01/timit/data_fbank/test/feats.scp ark:- |apply-cmvn-sliding --min-cmn-window=15 --cmn-window=1000 ark:- ark:- | splice-feats --left-context={} --right-context={} ark:- ark:-|
+
+test_label_stream: copy-int-vector ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_test.txt ark:- |
+#test_label_stream: copy-int-vector ark:toy_data_fbank/ali_test.txt ark:- |
+
+num_freq: 80
+
+encoder: FcEncoder
+encoder_args:
+    latent_dim: 64
+    hid_dims: [256, 128]
+
+decoder: FcDecoder
+decoder_args:
+    latent_dim: 64
+    hid_dims: [128, 256]
+
+model: AutoEncoder
+scaler_path: scaler_fbank.pth
+
+improvecriterion: loss
+early_stop: 10
+epochs: 200

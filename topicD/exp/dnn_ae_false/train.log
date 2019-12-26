@@ -1,0 +1,111 @@
+[ INFO : 2019-12-23 15:57:16,015 ] - Storing data at: exp/dnn_ae_false
+[ INFO : 2019-12-23 15:57:16,016 ] - <== Passed Arguments ==>
+[ INFO : 2019-12-23 15:57:16,018 ] - {'classifier': 'dnn_classifier',
+[ INFO : 2019-12-23 15:57:16,018 ] -  'classifier_args': {'hid_dims': [128, 256, 512, 256, 128, 64], 'num_cls': 51},
+[ INFO : 2019-12-23 15:57:16,018 ] -  'context': 2,
+[ INFO : 2019-12-23 15:57:16,018 ] -  'dataloader_args': {'batch_size': 2048, 'num_workers': 8},
+[ INFO : 2019-12-23 15:57:16,018 ] -  'dev_feat_stream': 'apply-cmvn '
+[ INFO : 2019-12-23 15:57:16,019 ] -                     '--utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/dev/utt2spk '
+[ INFO : 2019-12-23 15:57:16,019 ] -                     'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/dev/cmvn.scp '
+[ INFO : 2019-12-23 15:57:16,019 ] -                     'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/dev/feats.scp '
+[ INFO : 2019-12-23 15:57:16,019 ] -                     'ark:- |apply-cmvn-sliding --min-cmn-window=15 '
+[ INFO : 2019-12-23 15:57:16,019 ] -                     '--cmn-window=1000 ark:- ark:- | add-deltas ark:- ark:- | '
+[ INFO : 2019-12-23 15:57:16,019 ] -                     'splice-feats --left-context={} --right-context={} ark:- '
+[ INFO : 2019-12-23 15:57:16,019 ] -                     'ark:- |',
+[ INFO : 2019-12-23 15:57:16,020 ] -  'dev_label_stream': 'copy-int-vector '
+[ INFO : 2019-12-23 15:57:16,020 ] -                      'ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_dev.txt '
+[ INFO : 2019-12-23 15:57:16,020 ] -                      'ark:- |',
+[ INFO : 2019-12-23 15:57:16,020 ] -  'early_stop': 10,
+[ INFO : 2019-12-23 15:57:16,020 ] -  'encoder': 'FcEncoder',
+[ INFO : 2019-12-23 15:57:16,020 ] -  'encoder_args': {'hid_dims': [256, 128], 'latent_dim': 64},
+[ INFO : 2019-12-23 15:57:16,020 ] -  'encoder_path': 'exp/ae_212/model.pth',
+[ INFO : 2019-12-23 15:57:16,020 ] -  'epochs': 200,
+[ INFO : 2019-12-23 15:57:16,021 ] -  'fix_encoder': False,
+[ INFO : 2019-12-23 15:57:16,021 ] -  'improvecriterion': 'loss',
+[ INFO : 2019-12-23 15:57:16,021 ] -  'num_freq': 39,
+[ INFO : 2019-12-23 15:57:16,021 ] -  'optimizer': 'Adam',
+[ INFO : 2019-12-23 15:57:16,021 ] -  'optimizer_args': {'lr': 0.001},
+[ INFO : 2019-12-23 15:57:16,021 ] -  'scaler_path': 'exp/scaler.pth',
+[ INFO : 2019-12-23 15:57:16,021 ] -  'scheduler': 'ReduceLROnPlateau',
+[ INFO : 2019-12-23 15:57:16,021 ] -  'scheduler_args': {'cooldown': 1,
+[ INFO : 2019-12-23 15:57:16,022 ] -                     'factor': 0.1,
+[ INFO : 2019-12-23 15:57:16,022 ] -                     'mode': 'min',
+[ INFO : 2019-12-23 15:57:16,022 ] -                     'patience': 10,
+[ INFO : 2019-12-23 15:57:16,022 ] -                     'threshold': 0.001,
+[ INFO : 2019-12-23 15:57:16,022 ] -                     'verbose': False},
+[ INFO : 2019-12-23 15:57:16,022 ] -  'test_feat_stream': 'apply-cmvn '
+[ INFO : 2019-12-23 15:57:16,022 ] -                      '--utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/test/utt2spk '
+[ INFO : 2019-12-23 15:57:16,022 ] -                      'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/test/cmvn.scp '
+[ INFO : 2019-12-23 15:57:16,023 ] -                      'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/test/feats.scp '
+[ INFO : 2019-12-23 15:57:16,023 ] -                      'ark:- |apply-cmvn-sliding --min-cmn-window=15 '
+[ INFO : 2019-12-23 15:57:16,023 ] -                      '--cmn-window=1000 ark:- ark:- | add-deltas ark:- ark:- | '
+[ INFO : 2019-12-23 15:57:16,023 ] -                      'splice-feats --left-context={} --right-context={} ark:- '
+[ INFO : 2019-12-23 15:57:16,023 ] -                      'ark:- |',
+[ INFO : 2019-12-23 15:57:16,023 ] -  'test_label_stream': 'copy-int-vector '
+[ INFO : 2019-12-23 15:57:16,023 ] -                       'ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_test.txt '
+[ INFO : 2019-12-23 15:57:16,024 ] -                       'ark:- |',
+[ INFO : 2019-12-23 15:57:16,024 ] -  'train_feat_stream': 'apply-cmvn '
+[ INFO : 2019-12-23 15:57:16,024 ] -                       '--utt2spk=ark:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/train/utt2spk '
+[ INFO : 2019-12-23 15:57:16,024 ] -                       'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/train/cmvn.scp '
+[ INFO : 2019-12-23 15:57:16,024 ] -                       'scp:/mnt/lustre/sjtu/home/zkz01/timit/data_mfcc/train/feats.scp '
+[ INFO : 2019-12-23 15:57:16,024 ] -                       'ark:- |apply-cmvn-sliding --min-cmn-window=15 '
+[ INFO : 2019-12-23 15:57:16,024 ] -                       '--cmn-window=1000 ark:- ark:- | add-deltas ark:- ark:- '
+[ INFO : 2019-12-23 15:57:16,024 ] -                       '| splice-feats --left-context={} --right-context={} '
+[ INFO : 2019-12-23 15:57:16,025 ] -                       'ark:- ark:- |',
+[ INFO : 2019-12-23 15:57:16,025 ] -  'train_label_stream': 'copy-int-vector '
+[ INFO : 2019-12-23 15:57:16,025 ] -                        'ark:/mnt/lustre/sjtu/home/xnx98/zkz01/timit/data_for_brainlike/ali_train.txt '
+[ INFO : 2019-12-23 15:57:16,025 ] -                        'ark:- |'}
+[ INFO : 2019-12-23 15:58:12,341 ] - <== Encoder ==>
+[ INFO : 2019-12-23 15:58:12,342 ] - FcEncoder(
+[ INFO : 2019-12-23 15:58:12,343 ] -   (model): Sequential(
+[ INFO : 2019-12-23 15:58:12,343 ] -     (0): Linear(in_features=195, out_features=256, bias=True)
+[ INFO : 2019-12-23 15:58:12,343 ] -     (1): ReLU()
+[ INFO : 2019-12-23 15:58:12,343 ] -     (2): Linear(in_features=256, out_features=128, bias=True)
+[ INFO : 2019-12-23 15:58:12,343 ] -     (3): ReLU()
+[ INFO : 2019-12-23 15:58:12,343 ] -     (4): Linear(in_features=128, out_features=64, bias=True)
+[ INFO : 2019-12-23 15:58:12,344 ] -   )
+[ INFO : 2019-12-23 15:58:12,344 ] - )
+[ INFO : 2019-12-23 15:58:12,344 ] - <== Classifier ==>
+[ INFO : 2019-12-23 15:58:12,344 ] - dnn_classifier(
+[ INFO : 2019-12-23 15:58:12,344 ] -   (model): Sequential(
+[ INFO : 2019-12-23 15:58:12,345 ] -     (0): Linear(in_features=64, out_features=128, bias=True)
+[ INFO : 2019-12-23 15:58:12,345 ] -     (1): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[ INFO : 2019-12-23 15:58:12,345 ] -     (2): ReLU()
+[ INFO : 2019-12-23 15:58:12,345 ] -     (3): Linear(in_features=128, out_features=256, bias=True)
+[ INFO : 2019-12-23 15:58:12,345 ] -     (4): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[ INFO : 2019-12-23 15:58:12,345 ] -     (5): ReLU()
+[ INFO : 2019-12-23 15:58:12,346 ] -     (6): Linear(in_features=256, out_features=512, bias=True)
+[ INFO : 2019-12-23 15:58:12,346 ] -     (7): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[ INFO : 2019-12-23 15:58:12,346 ] -     (8): ReLU()
+[ INFO : 2019-12-23 15:58:12,346 ] -     (9): Linear(in_features=512, out_features=256, bias=True)
+[ INFO : 2019-12-23 15:58:12,346 ] -     (10): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[ INFO : 2019-12-23 15:58:12,346 ] -     (11): ReLU()
+[ INFO : 2019-12-23 15:58:12,346 ] -     (12): Linear(in_features=256, out_features=128, bias=True)
+[ INFO : 2019-12-23 15:58:12,347 ] -     (13): BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[ INFO : 2019-12-23 15:58:12,347 ] -     (14): ReLU()
+[ INFO : 2019-12-23 15:58:12,347 ] -     (15): Linear(in_features=128, out_features=64, bias=True)
+[ INFO : 2019-12-23 15:58:12,347 ] -     (16): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+[ INFO : 2019-12-23 15:58:12,347 ] -     (17): ReLU()
+[ INFO : 2019-12-23 15:58:12,347 ] -     (18): Linear(in_features=64, out_features=51, bias=True)
+[ INFO : 2019-12-23 15:58:12,347 ] -   )
+[ INFO : 2019-12-23 15:58:12,348 ] - )
+[ INFO : 2019-12-23 15:58:45,331 ] - <== Training Started ==>
+[ INFO : 2019-12-23 15:58:45,333 ] - +-----------+-----------+-----------+
+[ INFO : 2019-12-23 15:58:45,333 ] - |   Epoch   | Loss(CV)  |  Acc(CV)  |
+[ INFO : 2019-12-23 15:58:45,333 ] - +-----------+-----------+-----------+
+[ INFO : 2019-12-23 16:00:23,318 ] - |          1|     1.1125|    0.64582|
+[ INFO : 2019-12-23 16:01:58,957 ] - |          2|     1.0389|    0.66494|
+[ INFO : 2019-12-23 16:03:35,015 ] - |          3|     1.0105|    0.67349|
+[ INFO : 2019-12-23 16:05:10,878 ] - |          4|     1.0028|    0.67628|
+[ INFO : 2019-12-23 16:06:46,866 ] - |          5|     1.0045|    0.67761|
+[ INFO : 2019-12-23 16:08:22,294 ] - |          6|     1.0053|    0.67798|
+[ INFO : 2019-12-23 16:09:57,729 ] - |          7|     1.0114|    0.67871|
+[ INFO : 2019-12-23 16:11:33,598 ] - |          8|     1.0238|    0.67801|
+[ INFO : 2019-12-23 16:13:08,548 ] - |          9|     1.0432|    0.67383|
+[ INFO : 2019-12-23 16:14:44,028 ] - |         10|     1.0526|    0.67548|
+[ INFO : 2019-12-23 16:16:19,524 ] - |         11|     1.0693|    0.67381|
+[ INFO : 2019-12-23 16:17:54,963 ] - |         12|     1.0885|    0.67169|
+[ INFO : 2019-12-23 16:19:32,109 ] - |         13|     1.0983|    0.67241|
+[ INFO : 2019-12-23 16:21:08,506 ] - |         14|     1.1099|    0.67173|
+[ INFO : 2019-12-23 16:21:08,532 ] - +-----------+-----------+-----------+
+[ INFO : 2019-12-23 16:21:13,392 ] - Acc on Eval: 67.20%
